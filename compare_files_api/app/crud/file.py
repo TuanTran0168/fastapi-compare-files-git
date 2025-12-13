@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 from app.db import models
 
-def create_file(db: Session, filename: str, content: str):
-    db_file = models.File(filename=filename, content=content)
+def create_file(db: Session, filename: str, content: bytes, filetype: str):
+    db_file = models.File(filename=filename, content=content, filetype=filetype)
     db.add(db_file)
     db.commit()
     db.refresh(db_file)
