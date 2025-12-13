@@ -22,12 +22,13 @@ def git_like_diff(file1: File, file2: File, text1: str, text2: str):
         .diff-table {{ border-collapse: collapse; width: 100%; display: block; overflow-x: auto; white-space: nowrap; }}
         td, th {{ vertical-align: top; padding: 2px 5px; white-space: pre; }}
         th {{ background-color: #f6f8fa; position: sticky; top: 0; }}
-        .line-num {{ width: 40px; text-align: right; color: #999; position: sticky; left: 0; background-color: #f6f8fa; }}
+        .line-num {{ width: 40px; text-align: right; position: sticky; left: 0; background-color: #f6f8fa; }}
+        .line-num-added {{ background-color: #aceebb; }}
+        .line-num-removed {{ background-color: #ffcecb; }}
         .added {{ background-color: #e6ffed; }}
         .removed {{ background-color: #ffeef0; }}
         .unchanged:nth-child(even) {{ background-color: #f3f3f3; }}
         .unchanged:nth-child(odd) {{ background-color: #f8f8f8; }}
-        .highlight {{ background-color: yellow; }}
     </style>
     </head>
     <body>
@@ -42,7 +43,6 @@ def git_like_diff(file1: File, file2: File, text1: str, text2: str):
     old_num = 1
     new_num = 1
 
-    # highlight character-level changes for changed lines
     for line in diff:
         text = escape(line[2:])
         if line.startswith("  "):
@@ -51,12 +51,12 @@ def git_like_diff(file1: File, file2: File, text1: str, text2: str):
             old_num += 1
             new_num += 1
         elif line.startswith("- "):
-            html += f"<tr><td class='line-num'>{old_num}</td><td class='removed'>{text}</td>" \
+            html += f"<tr><td class='line-num line-num-removed'>{old_num}</td><td class='removed'>{text}</td>" \
                     f"<td class='line-num'></td><td></td></tr>"
             old_num += 1
         elif line.startswith("+ "):
             html += f"<tr><td class='line-num'></td><td></td>" \
-                    f"<td class='line-num'>{new_num}</td><td class='added'>{text}</td></tr>"
+                    f"<td class='line-num line-num-added'>{new_num}</td><td class='added'>{text}</td></tr>"
             new_num += 1
         elif line.startswith("? "):
             continue
