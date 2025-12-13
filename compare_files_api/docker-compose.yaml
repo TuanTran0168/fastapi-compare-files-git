@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.0.44-debian
+    container_name: fastapi_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: Admin@123
+      MYSQL_DATABASE: file_compare_db
+    ports:
+      - "3336:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./data/backup:/backup  # mount folder backup
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: fastapi_api
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env.local
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+
+volumes:
+  db_data:
