@@ -11,6 +11,7 @@ idna==3.11
 mysql-connector-python==9.5.0
 pydantic==2.12.5
 pydantic_core==2.41.5
+PyPDF2==3.0.1
 python-multipart==0.0.20
 SQLAlchemy==2.0.45
 starlette==0.50.0

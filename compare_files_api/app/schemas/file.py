@@ -3,6 +3,7 @@ from pydantic import BaseModel
 class FileResponse(BaseModel):
     id: int
     filename: str
+    filetype: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
