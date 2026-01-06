@@ -1,0 +1,9 @@
+| Django         | FastAPI                         |
+| -------------- | ------------------------------- |
+| makemigrations | alembic revision --autogenerate |
+| migrate        | alembic upgrade head            |
+| sqlmigrate     | alembic upgrade --sql           |
+| rollback       | alembic downgrade               |
+
+alembic revision --autogenerate -m "init tables"
+alembic upgrade head
