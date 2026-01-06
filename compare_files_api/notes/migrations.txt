@@ -1,0 +1,7 @@
+| Django         | FastAPI                         |
+| -------------- | ------------------------------- |
+| makemigrations | alembic revision --autogenerate |
+| migrate        | alembic upgrade head            |
+| sqlmigrate     | alembic upgrade --sql           |
+| rollback       | alembic downgrade               |
+
