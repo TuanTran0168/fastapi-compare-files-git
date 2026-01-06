@@ -5,9 +5,20 @@ from sqlalchemy import pool
 
 from alembic import context
 
+# import my settings
+from app.core.config import settings
+from app.db.models import *
+from app.utils.db_url_alembic import escape_percent_for_alembic
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
+
+# --- SET DATABASE_URL DYNAMICALLY ---
+# config.set_main_option("sqlalchemy.url", settings.DATABASE_URL.replace("%", "%%"))
+
+DATABASE_URL = escape_percent_for_alembic(settings.DATABASE_URL)
+config.set_main_option("sqlalchemy.url", DATABASE_URL)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
@@ -18,7 +29,10 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = None
+# target_metadata = None
+
+# --- IMPORT MODELS + TARGET METADATA ---
+target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

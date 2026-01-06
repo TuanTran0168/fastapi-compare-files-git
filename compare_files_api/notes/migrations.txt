@@ -5,3 +5,5 @@
 | sqlmigrate     | alembic upgrade --sql           |
 | rollback       | alembic downgrade               |
 
+alembic revision --autogenerate -m "init tables"
+alembic upgrade head
