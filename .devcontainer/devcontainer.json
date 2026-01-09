@@ -1,0 +1,20 @@
+{
+  "name": "FastAPI Dev Container",
+  "dockerComposeFile": [
+    "../compare_files_api/docker-compose-local.yaml"
+  ],
+  "service": "fastapi_app",
+  "workspaceFolder": "/app",
+  "shutdownAction": "stopCompose",
+
+  "extensions": [
+    "ms-python.python",
+    "ms-python.vscode-pylance"
+  ],
+
+  "settings": {
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
+    "python.analysis.autoSearchPaths": true,
+    "python.analysis.useLibraryCodeForTypes": true
+  }
+}
